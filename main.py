@@ -57,5 +57,6 @@ while True:
 
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights()
+        rumble()
 
     time.sleep(.3)
