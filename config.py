@@ -1,2 +1,2 @@
 #Hue Bridge IP
-'put the ip here'
+'192.168.0.106'
