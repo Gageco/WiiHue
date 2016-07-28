@@ -5,7 +5,7 @@
 #Put rooms between START and END only support for 2 rooms thus far, dont change room names
 #room num is attached to the 1 and 2 buttons on the wiimote
 'START'
-'room1', []
-'room2',[]
+'room1', [1,2]
+'room2',[3,4]
 'END'
 'test'

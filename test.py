@@ -2,7 +2,7 @@ f = open("./config.py")
 lines = f.readlines()
 f.close()
 
-dict = {'start' : 0, 'end' : 0}
+dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : []}
 
 linenum = 0
 for txt_line in lines:
@@ -17,6 +17,14 @@ for txt_line in lines:
     linenum += 1
 eval_line_txt = dict['start']
 
+room_num = 0
 while eval_line_txt != dict['end'] - 1:
     eval_line_txt += 1
-    print eval(lines[eval_line_txt])
+    evaled_lines = eval(lines[eval_line_txt])
+    room_num += 1
+    room_num_txt = 'room' + str(room_num)
+    dict[room_num_txt] = evaled_lines[1]
+    print dict[room_num_txt]
+
+b.create_group('room1', str(dict['room1']))
+b.create_group('room2', str(dict['room2']))
