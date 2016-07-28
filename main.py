@@ -75,12 +75,12 @@ while True:
         rumble()
 
     if (wm.state['buttons'] & cwiid.BTN_LEFT):
-        dict['bright'] = dict['bright'] - 25
+        dict['bright'] = dict['bright'] - 50
         checkset_bright()
         rumble()
 
     if (wm.state['buttons'] & cwiid.BTN_RIGHT):
-        dict['bright'] = dict['bright'] + 25
+        dict['bright'] = dict['bright'] + 50
         checkset_bright()
         rumble()
 

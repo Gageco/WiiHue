@@ -2,17 +2,21 @@ f = open("./config.py")
 lines = f.readlines()
 f.close()
 
-x = 0
+dict = {'start' : 0, 'end' : 0}
+
+linenum = 0
 for txt_line in lines:
     try:
-        print x
-        txt = eval(lines[x])
+        txt = eval(lines[linenum])
         if txt == 'START':
-            print "found start"
-            print x
+            dict['start'] = linenum
         if txt =='END':
-            print 'found end'
-            print x
+            dict['end'] = linenum
     except SyntaxError:
         pass
-    x += 1
+    linenum += 1
+eval_line_txt = dict['start']
+
+while eval_line_txt != dict['end'] - 1:
+    eval_line_txt += 1
+    print eval(lines[eval_line_txt])
