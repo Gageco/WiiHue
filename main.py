@@ -17,6 +17,20 @@ print "wiimote found"
 # set buttons to report when pressed
 wm.rpt_mode = cwiid.RPT_BTN
 
+#Check config for defined rooms and the associated lights
+x = 0
+for txt_line in lines:
+    try:
+        txt = eval(lines[x])
+        if txt == 'START':
+            print "found start"
+            print x
+        if txt =='END':
+            pass
+    except SyntaxError:
+        pass
+    x += 1
+
 def rumble():
     wm.rumble = True
     time.sleep(.1)
@@ -58,5 +72,9 @@ while True:
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights()
         rumble()
+
+    if (wm.state['buttons'] & cwiid.BTN_LEFT):
+
+    if (wm.state['buttons'] & cwiid.BTN_RIGHT):
 
     time.sleep(.3)
