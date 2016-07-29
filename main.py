@@ -46,8 +46,8 @@ while eval_line_txt != dict['end'] - 1:
     room_num_txt = 'room' + str(room_num)
     dict[room_num_txt] = evaled_lines[1]
 
-b.create_group('room1', str(dict['room1']))
-b.create_group('room2', str(dict['room2']))
+b.create_group('room1', dict['room1'])
+b.create_group('room2', dict['room2'])
 #END DEFINING ROOMS
 
 def rumble():
