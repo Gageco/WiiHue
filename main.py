@@ -81,7 +81,7 @@ def check_leds():
 def checkset_bright():
     if dict['bright'] >= 250:
         dict['bright'] = 254
-    if dict['bright'] <= 50:
+    if dict['bright'] <= 25:
         dict['bright'] = 0
     light_number = wm.state['led']
     b.set_light(light_number, 'bri', dict['bright'])
