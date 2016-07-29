@@ -62,9 +62,9 @@ def change_lights():
         if led_state == True:
             b.set_light(light_number, 'on', False)
             dict['bright'] = 0
-            if led_state == False:
-                b.set_light(light_number, 'on', True)
-                dict['bright'] = 254
+        elif led_state == False:
+            b.set_light(light_number, 'on', True)
+            dict['bright'] = 254
     except TypeError:
         print 'no attached light'
         rumble()
