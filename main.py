@@ -22,8 +22,9 @@ f = open("./config.py")
 lines = f.readlines()
 f.close()
 
-dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : []}
+dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True}
 
+#START DEFINING ROOMS
 linenum = 0
 for txt_line in lines:
     try:
@@ -48,6 +49,7 @@ while eval_line_txt != dict['end'] - 1:
 
 b.create_group('room1', str(dict['room1']))
 b.create_group('room2', str(dict['room2']))
+#END DEFINING ROOMS
 
 def rumble():
     wm.rumble = True
@@ -86,45 +88,51 @@ def checkset_bright():
     b.set_light(light_number, 'bri', dict['bright'])
 
 def change_group_light(room_name):
-    led_state = b.get_light(room_name, 'on')
-    if led_state == True:
+    if dict['group_state'] == True:
         b.set_light(room_name, 'on', False)
-    if led_state == False:
+        dict['group_state'] = False
+    if dict['group_state'] == False:
         b.set_light(room_name, 'on', True)
-
-dict = {'bright' : 0}
+        dict['group_state'] = True
 
 while True:
 
+#UP
     if (wm.state['buttons'] & cwiid.BTN_UP):
         wm.led = wm.state['led'] + 1
         rumble()
         check_leds()
 
+#DOWN
     if (wm.state['buttons'] & cwiid.BTN_DOWN):
         wm.led = wm.state['led'] - 1
         rumble()
         check_leds()
 
+#A
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights()
         rumble()
 
+#LEFT
     if (wm.state['buttons'] & cwiid.BTN_LEFT):
         dict['bright'] = dict['bright'] - 50
         checkset_bright()
         rumble()
 
+#RIGHT
     if (wm.state['buttons'] & cwiid.BTN_RIGHT):
         dict['bright'] = dict['bright'] + 50
         checkset_bright()
         rumble()
 
+#ONE
     if (wm.state['buttons'] & cwiid.BTN_1):
         room_name = 'room1'
         change_group_light(room_name)
         rumble()
 
+#TWO
     if (wm.state['buttons'] & cwiid.BTN_2):
         room_name = 'room2'
         change_group_light(room_name)
