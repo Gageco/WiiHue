@@ -27,7 +27,7 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 
 ## Bindings
 | Key | Function |       
-| - | - |
+| --- | --- |
 | A | Toggle individual light states |
 | B | Nothing (Yet) |
 | Up Arrow | Choose next light |
