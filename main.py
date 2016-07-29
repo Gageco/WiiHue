@@ -87,11 +87,13 @@ def checkset_bright():
     b.set_light(light_number, 'bri', dict['bright'])
 
 def change_group_light():
+    indict = dict['room_name']
+    light_set = dict[indict]
     if dict['group_state'] == True:
-        b.set_light(dict['room_name'], 'on', False)
+        b.set_light(light_set, 'on', False)
         dict['group_state'] = False
     if dict['group_state'] == False:
-        b.set_light(dict['room_name'], 'on', True)
+        b.set_light(light_set, 'on', True)
         dict['group_state'] = True
 
 while True:
