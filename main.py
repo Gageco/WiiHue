@@ -56,14 +56,19 @@ def rumble():
     wm.rumble = False
 
 def change_lights():
-    light_number = wm.state['led']
-    led_state = b.get_light(light_number, 'on')
-    if led_state == True:
-        b.set_light(light_number, 'on', False)
-        dict['bright'] = 0
-    if led_state == False:
-        b.set_light(light_number, 'on', True)
-        dict['bright'] = 254
+    try:
+        light_number = wm.state['led']
+        led_state = b.get_light(light_number, 'on')
+        if led_state == True:
+            b.set_light(light_number, 'on', False)
+            dict['bright'] = 0
+            if led_state == False:
+                b.set_light(light_number, 'on', True)
+                dict['bright'] = 254
+    except TypeError:
+        print 'no attached light'
+        rumble()
+        rumble()
 
 def led_increase():
     led_state = wm.state['led']
