@@ -21,6 +21,7 @@ wm.rpt_mode = cwiid.RPT_BTN
 f = open("./config.py")
 lines = f.readlines()
 f.close()
+wm.led = 1
 
 dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': ''}
 
@@ -80,8 +81,8 @@ def led_increase():
 def check_leds():
     if wm.state['led'] >= 16:
         wm.led = 15
-    if wm.state['led'] <= 0:
-        wm.led = 0
+    if wm.state['led'] <= 1:
+        wm.led = 1
 
 def checkset_bright():
     if dict['bright'] >= 250:
@@ -144,4 +145,4 @@ while True:
         change_group_light()
         rumble()
 
-    time.sleep(.3)
+    time.sleep(.1)
