@@ -9,13 +9,24 @@ except RuntimeError:
     print "failed to find wiimote"
 print "wiimote found"
 
-wm.led = 1
+wm.led = 15
+
+dict = ['state': True]
 
 while True:
-    wm.led = wm.state['led'] + 1
-    time.sleep(1)
-    wm.led = wm.state['led'] + 1
-    time.sleep(1)
-    cwiid.Wiimote()
-    wm.led = wm.state['led'] + 1
-    time.sleep(1)
+    if (wm.state['buttons'] & cwiid.BTN_A):
+        wm.close()
+        print "WiiMote Closed"
+        dict['state'] == False
+        while dict['state'] = False:
+            try:
+                wm = cwiid.WiiMote()
+                print "connecetion successful"
+                wm.rumble = True
+                time.sleep(.5)
+                dict['state'] = True
+                wm.rumble = False
+            except:
+                pass
+    else:
+        pass
