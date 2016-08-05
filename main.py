@@ -112,6 +112,7 @@ def mote_not_connected(wm):
         wm.rpt_mode = cwiid.RPT_BTN
         dict['timer'] = 0
         print "WIIMOTE FOUND"
+        return wm
     except RuntimeError:
         mote_not_connected(wm)
 
