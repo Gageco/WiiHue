@@ -105,7 +105,7 @@ def change_group_light():
 def reset_timer():
     dict['timer'] = 0
 
-def mote_not_connected()
+def mote_not_connected():
     try:
         wm = cwiid.Wiimote()
         wm.rpt_mode = cwiid.RPT_BTN
