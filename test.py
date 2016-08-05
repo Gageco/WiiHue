@@ -8,14 +8,10 @@ def connect_mote():
     try:
         # attempt to connect wii remote
         wm = cwiid.Wiimote()
-        print wm
     except RuntimeError:
         print "failed to find wiimote"
     print "wiimote found"
     wm.rpt_mode = cwiid.RPT_BTN
-
-connect_mote()
-cwiid.WiiMote().led = 15
 
 while True:
 

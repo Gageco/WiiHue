@@ -109,6 +109,7 @@ def mote_not_connected()
     try:
         wm = cwiid.Wiimote()
         wm.rpt_mode = cwiid.RPT_BTN
+        dict['timer'] = 0
     except RuntimeError:
         mote_not_connected()
 
@@ -167,7 +168,7 @@ while True:
     else:
         time_to_reset = dict['timer']
         dict['timer'] = time_to_reset + 1
-        if dict['timer'] == 1800:
+        if dict['timer'] == 10:
             wm.close()
             mote_not_connected()
 
