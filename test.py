@@ -11,14 +11,14 @@ print "wiimote found"
 
 wm.led = 15
 
-dict = {'state': True}
+dict = {'state' : True}
 
 while True:
     if (wm.state['buttons'] & cwiid.BTN_A):
         wm.close()
         print "WiiMote Closed"
-        dict['state'] == False
-        while dict['state'] = False:
+        dict['state'] = False
+        while dict['state'] == False:
             try:
                 wm = cwiid.WiiMote()
                 print "connecetion successful"
