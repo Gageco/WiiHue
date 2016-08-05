@@ -14,17 +14,18 @@ wm.led = 15
 dict = {'state' : True}
 
 while True:
-    try:
-        if (wm.state['buttons'] & cwiid.BTN_A):
-            wm.close()
-            print "WiiMote Closed"
-            dict['state'] = False
 
-    except KeyError:
-        pass
+    if dict['state'] == True
+        while dict['state'] == True:
+            if (wm.state['buttons'] & cwiid.BTN_A):
+                wm.close()
+                print "WiiMote Closed"
+                dict['state'] = False
+
 
     if dict['state'] == False:
         while dict['state'] == False:
+            print "1 + 2 now"
             wm = cwiid.WiiMote()
             print "connecetion successful"
             wm.rumble = True
