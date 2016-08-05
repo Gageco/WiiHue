@@ -23,7 +23,7 @@ lines = f.readlines()
 f.close()
 wm.led = 1
 
-dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': ''}
+dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': '', 'timer' : 0}
 
 #START DEFINING ROOMS
 linenum = 0
@@ -102,6 +102,18 @@ def change_group_light():
         b.set_light(light_set, 'on', True)
         dict['group_state'] = True
 
+def reset_timer():
+    dict['timer'] = 0
+
+def mote_not_connected()
+    try:
+        wm = cwiid.Wiimote()
+        wm.rpt_mode = cwiid.RPT_BTN
+    except RuntimeError:
+        mote_not_connected()
+
+
+
 while True:
 
 #UP
@@ -109,40 +121,54 @@ while True:
         wm.led = wm.state['led'] + 1
         rumble()
         check_leds()
+        reset_timer()
 
 #DOWN
     if (wm.state['buttons'] & cwiid.BTN_DOWN):
         wm.led = wm.state['led'] - 1
         rumble()
         check_leds()
+        reset_timer()
 
 #A
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights()
         rumble()
+        reset_timer()
 
 #LEFT
     if (wm.state['buttons'] & cwiid.BTN_LEFT):
         dict['bright'] = dict['bright'] - 50
         checkset_bright()
         rumble()
+        reset_timer()
 
 #RIGHT
     if (wm.state['buttons'] & cwiid.BTN_RIGHT):
         dict['bright'] = dict['bright'] + 50
         checkset_bright()
         rumble()
+        reset_timer()
 
 #ONE
     if (wm.state['buttons'] & cwiid.BTN_1):
         dict['room_name'] = 'room1'
         change_group_light()
         rumble()
+        reset_timer()
 
 #TWO
     if (wm.state['buttons'] & cwiid.BTN_2):
         dict['room_name'] = 'room2'
         change_group_light()
         rumble()
+        reset_timer()
+
+    else:
+        time_to_reset = dict['timer']
+        dict['timer'] = time_to_reset + 1
+        if dict['timer'] == 1800:
+            wm.close()
+            mote_not_connected()
 
     time.sleep(.1)
