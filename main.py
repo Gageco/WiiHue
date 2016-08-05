@@ -2,8 +2,6 @@ import cwiid
 import time
 from phue import Bridge
 
-delay_sleep_of_mote = 0
-
 f = open("./config.py")
 lines = f.readlines()
 f.close()
@@ -106,13 +104,6 @@ def change_group_light():
 
 while True:
 
-    if delay_sleep_of_mote == 18000
-        print "Delayed Sleep of WiiMote"
-        previous_led_state = wm.state['led']
-        wm.led = 16
-        time.sleep(1)
-        wm.led = previous_led_state
-
 #UP
     if (wm.state['buttons'] & cwiid.BTN_UP):
         wm.led = wm.state['led'] + 1
@@ -154,5 +145,4 @@ while True:
         change_group_light()
         rumble()
 
-    time.sleep(.2)
-    delay_sleep_of_mote += 1
+    time.sleep(.1)

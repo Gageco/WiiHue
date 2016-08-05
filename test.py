@@ -14,3 +14,4 @@ wm.led = 0
 while True:
     wm.led = wm.state['led'] + 1
     time.sleep(3600)
+    wm.led = wm.state['led'] + 1
