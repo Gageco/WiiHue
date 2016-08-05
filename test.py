@@ -3,18 +3,17 @@ import time
 
 dict = {'state' : True, 'wm' : ''}
 
-def connect_mote():
+def connect_mote(wm):
     print "press 1 + 2 now"
     try:
         # attempt to connect wii remote
         wm = cwiid.Wiimote()
-        print type(wm)
     except RuntimeError:
         print "failed to find wiimote"
     print "wiimote found"
     wm.rpt_mode = cwiid.RPT_BTN
 
-connect_mote()
+connect_mote(wm)
 wm.led = 15
 
 while True:
@@ -29,7 +28,7 @@ while True:
 
     if dict['state'] == False:
         while dict['state'] == False:
-            connect_mote()
+            connect_mote(wm)
             wm.rumble = True
             time.sleep(.5)
             dict['state'] = True
