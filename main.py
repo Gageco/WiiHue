@@ -107,6 +107,7 @@ def reset_timer():
 
 def mote_not_connected():
     try:
+        print "1 + 2"
         wm = cwiid.Wiimote()
         wm.rpt_mode = cwiid.RPT_BTN
         dict['timer'] = 0
