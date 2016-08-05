@@ -21,12 +21,15 @@ while True:
             dict['state'] = False
 
     except KeyError:
-    while dict['state'] == False:
-        wm = cwiid.WiiMote()
-        print "connecetion successful"
-        wm.rumble = True
-        time.sleep(.5)
-        dict['state'] = True
-        wm.rumble = False
+        pass
+
+    if dict['state'] = False:
+        while dict['state'] == False:
+            wm = cwiid.WiiMote()
+            print "connecetion successful"
+            wm.rumble = True
+            time.sleep(.5)
+            dict['state'] = True
+            wm.rumble = False
 
     time.sleep(.5)
