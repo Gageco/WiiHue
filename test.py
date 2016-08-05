@@ -2,19 +2,20 @@ import cwiid
 import time
 
 dict = {'state' : True, 'wm' : ''}
-wm = 'a'
-def connect_mote(wm):
+
+def connect_mote():
     print "press 1 + 2 now"
     try:
         # attempt to connect wii remote
         wm = cwiid.Wiimote()
+        print wm
     except RuntimeError:
         print "failed to find wiimote"
     print "wiimote found"
     wm.rpt_mode = cwiid.RPT_BTN
 
-connect_mote(wm)
-wm.led = 15
+connect_mote()
+cwiid.WiiMote().led = 15
 
 while True:
 
