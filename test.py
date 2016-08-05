@@ -1,7 +1,6 @@
 import cwiid
 import time
 
-wm.led = 15
 
 dict = {'state' : False}
 
