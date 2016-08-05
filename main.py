@@ -113,7 +113,7 @@ def mote_not_connected():
         dict['timer'] = 0
         print "WIIMOTE FOUND"
     except RuntimeError:
-        mote_not_connected()
+        mote_not_connected(wm)
 
 
 
@@ -172,6 +172,6 @@ while True:
         dict['timer'] = time_to_reset + 1
         if dict['timer'] == 10:
             wm.close()
-            mote_not_connected()
+            mote_not_connected(wm)
 
     time.sleep(.1)
