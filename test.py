@@ -15,7 +15,7 @@ dict = {'state' : True}
 
 while True:
 
-    if dict['state'] == True
+    if dict['state'] == True:
         while dict['state'] == True:
             if (wm.state['buttons'] & cwiid.BTN_A):
                 wm.close()
