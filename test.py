@@ -23,7 +23,7 @@ while True:
     except KeyError:
         pass
 
-    if dict['state'] = False:
+    if dict['state'] == False:
         while dict['state'] == False:
             wm = cwiid.WiiMote()
             print "connecetion successful"
