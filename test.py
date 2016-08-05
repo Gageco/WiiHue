@@ -2,7 +2,7 @@ import cwiid
 import time
 
 dict = {'state' : True, 'wm' : ''}
-
+wm = 'a'
 def connect_mote(wm):
     print "press 1 + 2 now"
     try:
