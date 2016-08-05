@@ -6,12 +6,7 @@ dict = {'state' : False}
 
 while True:
 
-    if dict['state'] == True:
-        while dict['state'] == True:
-            if (wm.state['buttons'] & cwiid.BTN_A):
-                wm.close()
-                print "WiiMote Closed"
-                dict['state'] = False
+
 
 
     if dict['state'] == False:
@@ -23,5 +18,12 @@ while True:
             time.sleep(.5)
             dict['state'] = True
             wm.rumble = False
+
+        if dict['state'] == True:
+            while dict['state'] == True:
+                if (wm.state['buttons'] & cwiid.BTN_A):
+                    wm.close()
+                    print "WiiMote Closed"
+                    dict['state'] = False
 
     time.sleep(.5)
