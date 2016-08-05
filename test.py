@@ -1,7 +1,7 @@
 import cwiid
 import time
 
-dict = {'state' : True, 'wm' : ''}
+dict = {'state' : True, 'wm' : []}
 
 def connect_mote():
     print "press 1 + 2 now"
