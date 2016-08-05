@@ -13,3 +13,15 @@ wm.led = 15
 
 wm.close()
 print "connection closed"
+
+wm = cwiid.Wiimote()
+print "connection found"
+wm.led = 15
+time.sleep(1)
+
+
+wm.close()
+print "connection closed"
+
+wm = cwiid.Wiimote()
+print "connection found"
