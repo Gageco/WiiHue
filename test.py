@@ -1,7 +1,7 @@
 import cwiid
 import time
 
-def connect_mote()
+def connect_mote():
     print "press 1 + 2 now"
     try:
         # attempt to connect wii remote
