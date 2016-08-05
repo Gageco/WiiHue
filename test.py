@@ -9,9 +9,13 @@ except RuntimeError:
     print "failed to find wiimote"
 print "wiimote found"
 
-wm.led = 0
+wm.led = 1
 
 while True:
     wm.led = wm.state['led'] + 1
-    time.sleep(3600)
+    time.sleep(1)
     wm.led = wm.state['led'] + 1
+    time.sleep(1)
+    cwiid.Wiimote()
+    wm.led = wm.state['led'] + 1
+    time.sleep(1)
