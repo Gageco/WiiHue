@@ -11,7 +11,7 @@ print "wiimote found"
 
 wm.led = 15
 
-dict = ['state': True]
+dict = {'state': True}
 
 while True:
     if (wm.state['buttons'] & cwiid.BTN_A):
