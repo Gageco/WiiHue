@@ -16,5 +16,4 @@ wm.rpt_mode = cwiid.RPT_BTN
 
 wm.led = 15
 time.sleep(3)
-wm.open()
 print dir(cwiid)
