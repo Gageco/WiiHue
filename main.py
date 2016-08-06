@@ -152,9 +152,8 @@ while True:
     if dict['repeat_cycle'] == True:
         read_btns(wm)
         dict['timer'] += 1
-        print dict['timer']
 
-    if dict['timer'] >= 1000:
+    if dict['timer'] >= 100000:
         dict['timer'] = 0
         wm.close()
         print "remote disconnected"
@@ -166,7 +165,7 @@ while True:
             # attempt to connect wii remote
             wm = cwiid.Wiimote()
             print "wiimote found"
-            time.sleep(3)
+            time.sleep(2)
             # set buttons to report when pressed
             wm.rpt_mode = cwiid.RPT_BTN
             dict['repeat_cycle'] = True
