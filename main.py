@@ -2,11 +2,13 @@ import cwiid
 import time
 from phue import Bridge
 
+#Check config for defined rooms and the associated lights
 f = open("./config.py")
 lines = f.readlines()
 f.close()
 bridge_ip = eval(lines[1])
 b = Bridge(bridge_ip)
+
 print "press 1 + 2 now"
 try:
     # attempt to connect wii remote
@@ -17,12 +19,9 @@ print "wiimote found"
 # set buttons to report when pressed
 wm.rpt_mode = cwiid.RPT_BTN
 
-#Check config for defined rooms and the associated lights
-f = open("./config.py")
-lines = f.readlines()
-f.close()
+wm.led = 1
 
-dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': ''}
+dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': '', 'timer' : 0, 'repeat_cycle' : True}
 
 #START DEFINING ROOMS
 linenum = 0
@@ -50,12 +49,12 @@ b.create_group('room1', dict['room1'])
 b.create_group('room2', dict['room2'])
 #END DEFINING ROOMS
 
-def rumble():
+def rumble(wm):
     wm.rumble = True
     time.sleep(.1)
     wm.rumble = False
 
-def change_lights():
+def change_lights(wm):
     try:
         light_number = wm.state['led']
         led_state = b.get_light(light_number, 'on')
@@ -67,23 +66,23 @@ def change_lights():
             dict['bright'] = 254
     except TypeError:
         print 'no attached light'
-        rumble()
-        rumble()
+        rumble(wm)
+        rumble(wm)
 
-def led_increase():
+def led_increase(wm):
     led_state = wm.state['led']
     if led_state >= 16:
         wm.led = 0
     else:
         wm.led = led_state + 1
 
-def check_leds():
+def check_leds(wm):
     if wm.state['led'] >= 16:
         wm.led = 15
-    if wm.state['led'] <= 0:
-        wm.led = 0
+    if wm.state['led'] <= 1:
+        wm.led = 1
 
-def checkset_bright():
+def checkset_bright(wm):
     if dict['bright'] >= 250:
         dict['bright'] = 254
     if dict['bright'] <= 25:
@@ -101,47 +100,77 @@ def change_group_light():
         b.set_light(light_set, 'on', True)
         dict['group_state'] = True
 
-while True:
-
-#UP
+def read_btns(wm):
     if (wm.state['buttons'] & cwiid.BTN_UP):
         wm.led = wm.state['led'] + 1
-        rumble()
-        check_leds()
+        rumble(wm)
+        check_leds(wm)
 
-#DOWN
+
+    #DOWN
     if (wm.state['buttons'] & cwiid.BTN_DOWN):
         wm.led = wm.state['led'] - 1
-        rumble()
-        check_leds()
+        rumble(wm)
+        check_leds(wm)
 
-#A
+
+    #A
     if (wm.state['buttons'] & cwiid.BTN_A):
-        change_lights()
-        rumble()
+        change_lights(wm)
+        rumble(wm)
 
-#LEFT
+
+    #LEFT
     if (wm.state['buttons'] & cwiid.BTN_LEFT):
         dict['bright'] = dict['bright'] - 50
-        checkset_bright()
-        rumble()
+        checkset_bright(wm)
+        rumble(wm)
 
-#RIGHT
+
+    #RIGHT
     if (wm.state['buttons'] & cwiid.BTN_RIGHT):
         dict['bright'] = dict['bright'] + 50
-        checkset_bright()
-        rumble()
+        checkset_bright(wm)
+        rumble(wm)
 
-#ONE
+
+    #ONE
     if (wm.state['buttons'] & cwiid.BTN_1):
         dict['room_name'] = 'room1'
         change_group_light()
-        rumble()
+        rumble(wm)
 
-#TWO
+
+    #TWO
     if (wm.state['buttons'] & cwiid.BTN_2):
         dict['room_name'] = 'room2'
         change_group_light()
-        rumble()
+        rumble(wm)
 
-    time.sleep(.3)
+
+while True:
+    if dict['repeat_cycle'] == True:
+        read_btns(wm)
+        dict['timer'] += 1
+#Thats about an hour of inactivity till it disconnects
+    if dict['timer'] >= 10000000:
+        dict['timer'] = 0
+        wm.close()
+        print "remote disconnected due to inactivity"
+        dict['repeat_cycle'] = False
+
+    if dict['repeat_cycle'] == False:
+        print 'looking for remote'
+        try:
+            # attempt to connect wii remote
+            wm = cwiid.Wiimote()
+            print "wiimote found"
+            time.sleep(2)
+            # set buttons to report when pressed
+            wm.rpt_mode = cwiid.RPT_BTN
+            wm.led = 1
+            dict['repeat_cycle'] = True
+        except (RuntimeError, ValueError):
+            print "failed to find wiimote"
+
+        time.sleep(.1)
