@@ -100,6 +100,23 @@ def change_group_light():
         b.set_light(light_set, 'on', True)
         dict['group_state'] = True
 
+def check_light_state(wm):
+    led_num = wm.state['led']
+    led_state = b.get_light(led_num, 'on')
+    if led_state = True:
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+        time.sleep(1)
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+
+    if led_state = False:
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+
 def read_btns(wm):
     #UP
     if (wm.state['buttons'] & cwiid.BTN_UP):
@@ -119,6 +136,10 @@ def read_btns(wm):
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights(wm)
         rumble(wm)
+
+    #B
+    if (wm.state['buttons'] & cwiid.BTN_B):
+        check_light_state(wm)
 
 
     #LEFT
@@ -151,9 +172,11 @@ def read_btns(wm):
     #HOME
     if (wm.state['buttons'] & cwiid.BTN_HOME):
         print 'remote diconnected manually'
+        rumble(wm)
         wm.close()
         dict['timer'] = 0
         dict['repeat_cycle'] = False
+
 
 while True:
     if dict['repeat_cycle'] == True:
