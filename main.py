@@ -152,8 +152,8 @@ while True:
     if dict['repeat_cycle'] == True:
         read_btns(wm)
         dict['timer'] += 1
-
-    if dict['timer'] >= 10000:
+#Thats about an hour of inactivity till it disconnects
+    if dict['timer'] >= 10000000:
         dict['timer'] = 0
         wm.close()
         print "remote disconnected due to inactivity"
@@ -168,6 +168,7 @@ while True:
             time.sleep(2)
             # set buttons to report when pressed
             wm.rpt_mode = cwiid.RPT_BTN
+            wm.led = 1
             dict['repeat_cycle'] = True
         except (RuntimeError, ValueError):
             print "failed to find wiimote"
