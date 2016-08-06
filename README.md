@@ -42,5 +42,5 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 Some things I want to add in the future
 - [x] Feedback for getting the state of the light possibly using the B buttons
 - [ ] More Rooms
-- [ ] Low Battery Disconnect
+- [x] Low Battery Disconnect
 - [x] Manual Disconnect
