@@ -173,8 +173,8 @@ while True:
             time.sleep(3)
             # set buttons to report when pressed
             wm.rpt_mode = cwiid.RPT_BTN
+            dict['repeat_cycle'] = True
         except (RuntimeError, ValueError):
             print "failed to find wiimote"
-
 
         time.sleep(.1)
