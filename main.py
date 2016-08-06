@@ -160,11 +160,13 @@ while True:
         read_btns(wm)
         dict['timer'] += 1
         print dict['timer']
-        if dict['timer'] >= 10:
-            dict['timer'] = 0
-            wm.close()
-            print "remote disconnected"
-            dict['repeat_cycle'] = False
+
+    if dict['timer'] >= 100:
+        dict['timer'] = 0
+        wm.close()
+        print "remote disconnected"
+        dict['repeat_cycle'] = False
+
     if dict['repeat_cycle'] == False:
         print 'looking for remote'
         try:
