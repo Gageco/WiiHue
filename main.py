@@ -160,7 +160,7 @@ while True:
         read_btns(wm)
         dict['timer'] += 1
         print dict['timer']
-        if dict['timer'] <= 10:
+        if dict['timer'] >= 10:
             dict['timer'] = 0
             wm.close()
             print "remote disconnected"
