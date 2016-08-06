@@ -181,11 +181,20 @@ def read_btns(wm):
         dict['timer'] = 0
         dict['repeat_cycle'] = False
 
+def check_bat(wm):
+    battery_stat = wm.state['battery']
+    if battery_stat <= 10:
+        print 'remote disconnected due to low battery'
+        wm.close()
+        dict['timer'] = 0
+        dict['repeat_cycle'] = False
 
 while True:
     if dict['repeat_cycle'] == True:
         read_btns(wm)
+        check_bat(wm)
         dict['timer'] += 1
+        
 #Thats about an hour of inactivity till it disconnects
     if dict['timer'] >= 10000000:
         dict['timer'] = 0
