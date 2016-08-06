@@ -103,7 +103,7 @@ def change_group_light():
 def check_light_state(wm):
     led_num = wm.state['led']
     led_state = b.get_light(led_num, 'on')
-    if led_state = True:
+    if led_state == True:
         wm.led = 15
         time.sleep(1)
         wm.led = 0
@@ -112,7 +112,7 @@ def check_light_state(wm):
         time.sleep(1)
         wm.led = 0
 
-    if led_state = False:
+    if led_state == False:
         wm.led = 15
         time.sleep(1)
         wm.led = 0
