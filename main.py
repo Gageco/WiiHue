@@ -169,11 +169,12 @@ while True:
         try:
             # attempt to connect wii remote
             wm = cwiid.Wiimote()
+            print "wiimote found"
+            time.sleep(3)
+            # set buttons to report when pressed
+            wm.rpt_mode = cwiid.RPT_BTN
         except (RuntimeError, ValueError):
             print "failed to find wiimote"
-        print "wiimote found"
-        time.sleep(3)
-        # set buttons to report when pressed
-        wm.rpt_mode = cwiid.RPT_BTN
+
 
         time.sleep(.1)
