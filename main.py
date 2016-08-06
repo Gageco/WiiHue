@@ -153,10 +153,10 @@ while True:
         read_btns(wm)
         dict['timer'] += 1
 
-    if dict['timer'] >= 100000:
+    if dict['timer'] >= 10000:
         dict['timer'] = 0
         wm.close()
-        print "remote disconnected"
+        print "remote disconnected due to inactivity"
         dict['repeat_cycle'] = False
 
     if dict['repeat_cycle'] == False:
