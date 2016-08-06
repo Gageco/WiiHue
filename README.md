@@ -36,9 +36,12 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 |Right Arrow|Decrease brightness of individual light
 |1 Button| Toggle room one lights
 |2 Button| Toggle room two lights
+|Home| Manual Disconnect
 
 
 ## Plans
 Some things I want to add in the future
-- Feedback for getting the state of the light possibly using the B buttons
-- More Roomes
+[] Feedback for getting the state of the light possibly using the B buttons
+[] More Rooms
+[] Low Battery Disconnect
+[] Manual Disconnect

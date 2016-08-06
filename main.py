@@ -101,6 +101,7 @@ def change_group_light():
         dict['group_state'] = True
 
 def read_btns(wm):
+    #UP
     if (wm.state['buttons'] & cwiid.BTN_UP):
         wm.led = wm.state['led'] + 1
         rumble(wm)
@@ -147,6 +148,12 @@ def read_btns(wm):
         change_group_light()
         rumble(wm)
 
+    #HOME
+    if (wm.state['buttons'] & cwiid.BTN_HOME):
+        print 'remote diconnected manually'
+        wm.close()
+        dict['timer'] = 0
+        dict['repeat_cycle'] = False
 
 while True:
     if dict['repeat_cycle'] == True:
