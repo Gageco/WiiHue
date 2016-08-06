@@ -148,13 +148,6 @@ def read_btns(wm):
         rumble(wm)
         reset_timer()
 
-    else:
-        time_to_reset = dict['timer']
-        dict['timer'] = time_to_reset + 1
-        if dict['timer'] == 10:
-            wm.close()
-            mote_not_connected(wm)
-
 while True:
     if dict['repeat_cycle'] == True:
         read_btns(wm)
