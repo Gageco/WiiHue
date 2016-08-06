@@ -29,7 +29,7 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 |Key|Function           
 |-|
 |A|Toggle individual light states
-|B| Nothing (Yet)
+|B| Check light state, blinks once for off twice for on
 |Up Arrow|Choose next light
 |Down Arrow|Choose previous light     
 |Left Arrow|Increase brightness of individual light
@@ -41,7 +41,7 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 
 ## Plans
 Some things I want to add in the future
-- [ ] Feedback for getting the state of the light possibly using the B buttons
+- [x] Feedback for getting the state of the light possibly using the B buttons
 - [ ] More Rooms
 - [ ] Low Battery Disconnect
 - [x] Manual Disconnect

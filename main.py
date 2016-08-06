@@ -111,11 +111,15 @@ def check_light_state(wm):
         wm.led = 15
         time.sleep(1)
         wm.led = 0
+        time.sleep(1)
+        wm.led = 1
 
     if led_state == False:
         wm.led = 15
         time.sleep(1)
         wm.led = 0
+        time.sleep(1)
+        wm.led = 1
 
 def read_btns(wm):
     #UP
