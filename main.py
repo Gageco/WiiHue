@@ -105,48 +105,48 @@ def read_btns(wm):
         wm.led = wm.state['led'] + 1
         rumble(wm)
         check_leds(wm)
-        reset_timer()
+
 
     #DOWN
     if (wm.state['buttons'] & cwiid.BTN_DOWN):
         wm.led = wm.state['led'] - 1
         rumble(wm)
         check_leds(wm)
-        reset_timer()
+
 
     #A
     if (wm.state['buttons'] & cwiid.BTN_A):
         change_lights(wm)
         rumble(wm)
-        reset_timer()
+
 
     #LEFT
     if (wm.state['buttons'] & cwiid.BTN_LEFT):
         dict['bright'] = dict['bright'] - 50
         checkset_bright(wm)
         rumble(wm)
-        reset_timer()
+
 
     #RIGHT
     if (wm.state['buttons'] & cwiid.BTN_RIGHT):
         dict['bright'] = dict['bright'] + 50
         checkset_bright(wm)
         rumble(wm)
-        reset_timer()
+
 
     #ONE
     if (wm.state['buttons'] & cwiid.BTN_1):
         dict['room_name'] = 'room1'
         change_group_light()
         rumble(wm)
-        reset_timer()
+
 
     #TWO
     if (wm.state['buttons'] & cwiid.BTN_2):
         dict['room_name'] = 'room2'
         change_group_light()
         rumble(wm)
-        reset_timer()
+
 
 while True:
     if dict['repeat_cycle'] == True:
@@ -154,7 +154,7 @@ while True:
         dict['timer'] += 1
         print dict['timer']
 
-    if dict['timer'] >= 100:
+    if dict['timer'] >= 1000:
         dict['timer'] = 0
         wm.close()
         print "remote disconnected"
