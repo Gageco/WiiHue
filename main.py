@@ -2,28 +2,33 @@ import cwiid
 import time
 from phue import Bridge
 
-#Check config for defined rooms and the associated lights
+#Check config for later use
 f = open("./config.py")
 lines = f.readlines()
 f.close()
+#Get Hue bridge ip from config
 bridge_ip = eval(lines[1])
 b = Bridge(bridge_ip)
+wiimote_connected = False
 
-print "press 1 + 2 now"
-try:
-    # attempt to connect wii remote
-    wm = cwiid.Wiimote()
-except RuntimeError:
-    print "failed to find wiimote"
-print "wiimote found"
-# set buttons to report when pressed
-wm.rpt_mode = cwiid.RPT_BTN
+#Attempt to connect wiimote until successful
+while wiimote_connected == False:
+    print "press 1 + 2 now"
+    try:
+        # attempt to connect wii remote
+        wm = cwiid.Wiimote()
+        print "wiimote found"
+        # set buttons to report when pressed
+        wm.rpt_mode = cwiid.RPT_BTN
+        wm.led = 1
+        wiimote_connected = True
+    except (RuntimeError, NameError):
+        print "failed to find wiimote, retrying"
 
-wm.led = 1
-
+#dictionary for program use
 dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': '', 'timer' : 0, 'repeat_cycle' : True}
 
-#START DEFINING ROOMS
+#START DEFINING ROOMS from config
 linenum = 0
 for txt_line in lines:
     try:
@@ -48,7 +53,9 @@ while eval_line_txt != dict['end'] - 1:
 b.create_group('room1', dict['room1'])
 b.create_group('room2', dict['room2'])
 #END DEFINING ROOMS
+
 def check_bat(wm):
+    #ensure battery is not to low
     battery_stat = wm.state['battery']
     if battery_stat <= 10:
         print 'remote disconnected due to low battery'
@@ -57,11 +64,13 @@ def check_bat(wm):
         dict['repeat_cycle'] = False
 
 def rumble(wm):
+    #make wiimote rumble
     wm.rumble = True
     time.sleep(.1)
     wm.rumble = False
 
 def change_lights(wm):
+    #change state of hue light based upon the light thats on on the wii remote
     try:
         light_number = wm.state['led']
         led_state = b.get_light(light_number, 'on')
@@ -72,11 +81,13 @@ def change_lights(wm):
             b.set_light(light_number, 'on', True)
             dict['bright'] = 254
     except TypeError:
+        #if no lights with a set number are found this is pulled
         print 'no attached light'
         rumble(wm)
         rumble(wm)
 
 def led_increase(wm):
+    #change wii remote leds
     led_state = wm.state['led']
     if led_state >= 16:
         wm.led = 0
@@ -84,12 +95,14 @@ def led_increase(wm):
         wm.led = led_state + 1
 
 def check_leds(wm):
+    #check that the leds are not above the ones that are on the wiiremote
     if wm.state['led'] >= 16:
         wm.led = 15
     if wm.state['led'] <= 1:
         wm.led = 1
 
 def checkset_bright(wm):
+    #change hue light brightness
     if dict['bright'] >= 250:
         dict['bright'] = 254
     if dict['bright'] <= 25:
@@ -98,6 +111,7 @@ def checkset_bright(wm):
     b.set_light(light_number, 'bri', dict['bright'])
 
 def change_group_light():
+    #change hue lights that are assigned to a room
     light_set = dict[dict['room_name']]
     #light_set = dict[indict]
     if dict['group_state'] == True:
@@ -108,6 +122,7 @@ def change_group_light():
         dict['group_state'] = True
 
 def check_light_state(wm):
+    #check state of the hue lights and then give feedback on wiimote, flash twice for on and once for off
     led_num = wm.state['led']
     led_state = b.get_light(led_num, 'on')
     if led_state == True:
@@ -129,6 +144,7 @@ def check_light_state(wm):
         wm.led = 1
 
 def read_btns(wm):
+    #read wii remote buttons
     #UP
     if (wm.state['buttons'] & cwiid.BTN_UP):
         wm.led = wm.state['led'] + 1
@@ -191,17 +207,19 @@ def read_btns(wm):
         dict['repeat_cycle'] = False
 
 while True:
+    #a timer that is used to disconnect the wiimote
     if dict['repeat_cycle'] == True:
         read_btns(wm)
         dict['timer'] += 1
 
-#Thats about an hour of inactivity till it disconnects
+    #Thats about an hour of inactivity till it disconnects
     if dict['timer'] >= 10000000:
         dict['timer'] = 0
         wm.close()
         print "remote disconnected due to inactivity"
         dict['repeat_cycle'] = False
 
+    #if the wii remote disconnects this starts and continues to look for a new wiiremote and trys to attach it
     if dict['repeat_cycle'] == False:
         print 'looking for remote'
         try:
