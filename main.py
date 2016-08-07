@@ -1,13 +1,18 @@
 import cwiid
 import time
 from phue import Bridge
+import requests
 
 #Check config for later use
 f = open("./config.py")
 lines = f.readlines()
 f.close()
-#Get Hue bridge ip from config
-bridge_ip = eval(lines[1])
+#Get Hue bridge ip from the site below
+r = requests.get('https://www.meethue.com/api/nupnp')
+x = r.json()
+for item in x:
+    bridge_ip = dict(item)['internalipaddress']
+    print 'Hue Bridge IP: ' + bridge_ip
 b = Bridge(bridge_ip)
 wiimote_connected = False
 
