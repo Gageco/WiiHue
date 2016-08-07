@@ -8,18 +8,20 @@ lines = f.readlines()
 f.close()
 bridge_ip = eval(lines[1])
 b = Bridge(bridge_ip)
+wiimote_connected = False
 
-print "press 1 + 2 now"
-try:
-    # attempt to connect wii remote
-    wm = cwiid.Wiimote()
-except RuntimeError:
-    print "failed to find wiimote"
-print "wiimote found"
-# set buttons to report when pressed
-wm.rpt_mode = cwiid.RPT_BTN
-
-wm.led = 1
+while wiimote_connected == False:
+    print "press 1 + 2 now"
+    try:
+        # attempt to connect wii remote
+        wm = cwiid.Wiimote()
+        print "wiimote found"
+        # set buttons to report when pressed
+        wm.rpt_mode = cwiid.RPT_BTN
+        wm.led = 1
+        wiimote_connected = True
+    except (RuntimeError, NameError):
+        print "failed to find wiimote, retrying"
 
 dict = {'start' : 0, 'end' : 0, 'room1' : [], 'room2' : [], 'bright' : 0, 'group_state' : True, 'room_name': '', 'timer' : 0, 'repeat_cycle' : True}
 
