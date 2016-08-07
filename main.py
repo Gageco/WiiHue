@@ -7,7 +7,7 @@ import requests
 f = open("./config.py")
 lines = f.readlines()
 f.close()
-#Get Hue bridge ip from config
+#Get Hue bridge ip from the site below
 r = requests.get('https://www.meethue.com/api/nupnp')
 x = r.json()
 for item in x:
