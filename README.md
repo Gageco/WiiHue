@@ -1,5 +1,5 @@
 # WiiHue
-An attempt at making Hue Lights controllable with a wiimote.
+An attempt at making Hue Lights controllable with a wiimote. If you have any questions its worth consulting my blog [here]()
 
 ## Table of Contents
 * [Installation](#installing)
