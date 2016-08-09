@@ -14,9 +14,11 @@ try:
     for item in x:
         bridge_ip = dict(item)['internalipaddress']
         print 'Hue Bridge IP: ' + bridge_ip
-        lines[1] = bridge_ip
+        writefile = open("./config.py", "w")
+        file.write(bridge_ip)
+        file.close()
 except:
-    bridge_ip = lines[1]
+    bridge_ip = lines[0]
     print 'Hue Bridge IP: ' + bridge_ip
 
 b = Bridge(bridge_ip)
