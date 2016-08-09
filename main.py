@@ -13,10 +13,10 @@ try:
     x = r.json()
     for item in x:
         bridge_ip = dict(item)['internalipaddress']
-        print 'Hue Bridge IP: ' + bridge_ip
-        writefile = open("./config.py", "w")
-        file.write(bridge_ip)
-        file.close()
+    print 'Hue Bridge IP: ' + bridge_ip
+    writefile = open("./config.py", "w")
+    wriefile.write(bridge_ip)
+    wriefile.close()
 except:
     bridge_ip = lines[0]
     print 'Hue Bridge IP: ' + bridge_ip
