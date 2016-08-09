@@ -15,8 +15,8 @@ try:
         bridge_ip = dict(item)['internalipaddress']
     print 'Hue Bridge IP: ' + bridge_ip
     writefile = open("./config.py", "w")
-    wriefile.write(bridge_ip)
-    wriefile.close()
+    writefile.write(bridge_ip)
+    writefile.close()
 except:
     bridge_ip = lines[0]
     print 'Hue Bridge IP: ' + bridge_ip
