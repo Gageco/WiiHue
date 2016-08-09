@@ -7,12 +7,9 @@ import requests
 f = open("./config.py")
 lines = f.readlines()
 f.close()
-#Get Hue bridge ip from the site below
-r = requests.get('https://www.meethue.com/api/nupnp')
-x = r.json()
-for item in x:
-    bridge_ip = dict(item)['internalipaddress']
-    print 'Hue Bridge IP: ' + bridge_ip
+bridge_ip = lines[1]
+print 'Hue Bridge IP: ' + bridge_ip
+
 b = Bridge(bridge_ip)
 wiimote_connected = False
 
@@ -127,30 +124,28 @@ def change_group_light():
         dict['group_state'] = True
 
 def check_light_state(wm):
-    try:
-        #check state of the hue lights and then give feedback on wiimote, flash twice for on and once for off
-        led_num = wm.state['led']
-        led_state = b.get_light(led_num, 'on')
-        if led_state == True:
-            wm.led = 15
-            time.sleep(1)
-            wm.led = 0
-            time.sleep(1)
-            wm.led = 15
-            time.sleep(1)
-            wm.led = 0
-            time.sleep(1)
+    #check state of the hue lights and then give feedback on wiimote, flash twice for on and once for off
+    led_num = wm.state['led']
+    led_state = b.get_light(led_num, 'on')
+    if led_state == True:
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+        time.sleep(1)
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+        time.sleep(1)
+        wm.led = 1
 
-        if led_state == False:
-            wm.led = 15
-            time.sleep(1)
-            wm.led = 0
-            time.sleep(1)
+    if led_state == False:
+        wm.led = 15
+        time.sleep(1)
+        wm.led = 0
+        time.sleep(1)
+        wm.led = 1
 
-        wm.led = led_num
-    except TypeError:
-        rumble(wm)
-        rumble(wm)
+    wm.led = led_num
 
 def read_btns(wm):
     #read wii remote buttons
