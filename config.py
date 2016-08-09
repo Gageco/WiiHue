@@ -1,5 +1,5 @@
 #HUE IP ADDRESS
-
+#HUE IP ADDRESS
 #Room configuration SETUP: 'kitchen', [1,2,3]
 #                           TITLE       LIGHT NUMs
 #Put rooms between START and END only support for 2 rooms thus far
