@@ -1,4 +1,4 @@
-#HUE IP ADDRESS
+192.168.0.105
 #HUE IP ADDRESS
 #Room configuration SETUP: 'kitchen', [1,2,3]
 #                           TITLE       LIGHT NUMs
