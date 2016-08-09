@@ -148,6 +148,8 @@ def check_light_state(wm):
         time.sleep(1)
         wm.led = 1
 
+    wm.led = led_num
+
 def read_btns(wm):
     #read wii remote buttons
     #UP
