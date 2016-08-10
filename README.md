@@ -30,10 +30,10 @@ To use you will need to find the ip of the Hue Bridge, make sure its on and the 
 | --- | --- |
 | A | Toggle individual light states |
 | B | Check light state, blinks once for off twice for on |
-| Up Arrow | Choose next light |
-| Down Arrow | Choose previous light |
-| Left Arrow | Increase brightness of individual light |
-| Right Arrow | Decrease brightness of individual light |
+| Right Arrow | Choose next light |
+| Left Arrow | Choose previous light |
+| Up Arrow | Increase brightness of individual light |
+| Down Arrow | Decrease brightness of individual light |
 | 1 Button | Toggle room one lights |
 | 2 Button | Toggle room two lights |
 | Home | Manual Disconnect |
