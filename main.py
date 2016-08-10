@@ -7,7 +7,11 @@ import requests
 f = open("./config.py")
 lines = f.readlines()
 f.close()
-bridge_ip = lines[1]
+#Get Hue bridge ip from the site below
+r = requests.get('https://www.meethue.com/api/nupnp')
+x = r.json()
+for item in x:
+    bridge_ip = dict(item)['internalipaddress']
 print 'Hue Bridge IP: ' + bridge_ip
 
 b = Bridge(bridge_ip)
