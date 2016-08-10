@@ -1,5 +1,6 @@
 #HUE IP ADDRESS
 192.168.0.105
+#Get the ip from https://www.meethue.com/api/nupnp
 #Room configuration SETUP: 'kitchen', [1,2,3]
 #                           TITLE       LIGHT NUMs
 #Put rooms between START and END only support for 2 rooms thus far
