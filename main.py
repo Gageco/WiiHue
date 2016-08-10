@@ -150,14 +150,14 @@ def check_light_state(wm):
 def read_btns(wm):
     #read wii remote buttons
     #UP
-    if (wm.state['buttons'] & cwiid.BTN_UP):
+    if (wm.state['buttons'] & cwiid.BTN_RIGHT):
         wm.led = wm.state['led'] + 1
         rumble(wm)
         check_leds(wm)
 
 
     #DOWN
-    if (wm.state['buttons'] & cwiid.BTN_DOWN):
+    if (wm.state['buttons'] & cwiid.BTN_LEFT):
         wm.led = wm.state['led'] - 1
         rumble(wm)
         check_leds(wm)
@@ -174,14 +174,14 @@ def read_btns(wm):
 
 
     #LEFT
-    if (wm.state['buttons'] & cwiid.BTN_LEFT):
+    if (wm.state['buttons'] & cwiid.BTN_DOWN):
         dict['bright'] = dict['bright'] - 50
         checkset_bright(wm)
         rumble(wm)
 
 
     #RIGHT
-    if (wm.state['buttons'] & cwiid.BTN_RIGHT):
+    if (wm.state['buttons'] & cwiid.BTN_UP):
         dict['bright'] = dict['bright'] + 50
         checkset_bright(wm)
         rumble(wm)
